@@ -184,7 +184,7 @@ namespace NUnit.Framework.Internal.WorkItems
             /* using a separate ExecutionContext for every test case,
              * guarantees us to have a dedicated "namespace" for the
              * LogicalCallContext per testcase */
-            ExecutionContext ec = ExecutionContext.Capture().CreateCopy();
+            ExecutionContext ec = ExecutionContext.Capture();
             ExecutionContext.Run(ec, DispatchWork, null);
         }
 
