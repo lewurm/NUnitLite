@@ -70,11 +70,12 @@ namespace NUnit.Framework.Internal
 		public void Set (TestExecutionContext context, long startTicks, TestResult result) {
 			var frame = new Tuple<TestExecutionContext, long, TestResult>(context, startTicks, result);
 
+			var name = result.FullName + "_" + result.Test.FullName + "_" + result.GetHashCode ();
 			/* keep name in LogicalCallContext, because this will be inherited by
 			 * Threads spawned by the test case */
-			CallContext.SetData(CONTEXT_KEY, new Container(result.Test.FullName));
+			CallContext.SetData(CONTEXT_KEY, new Container(name));
 
-			this.lookupTable.Add(result.Test.FullName, result);
+			this.lookupTable.Add(name, result);
 			this.testStack.Push(frame);
 		}
 
